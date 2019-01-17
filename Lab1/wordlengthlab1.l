@@ -10,12 +10,18 @@
         January 2015
    */
 	int lgths[100];
+	int countNum = 0;
+	int countLines = 0;
 %%
 [a-zA-Z]+	lgths[yyleng]++;
-.	|
-\n	;
+[0-9]+      countNum++;
+\n	    countLines++;
+.	;
+
 %%
 yywrap()
+
+
 {
 	int i;
 	printf("Length  No. words\n");
@@ -24,6 +30,7 @@ yywrap()
 			printf("%5d%10d\n",i,lgths[i]);
 		}
 	}
+	printf("Number of Numbers:%3d\nNumber of New Lines:%3d\n",countNum, countLines);
 	return(1);
 }
 
