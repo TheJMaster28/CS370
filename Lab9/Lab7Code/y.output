@@ -1,0 +1,1605 @@
+Terminals unused in grammar
+
+   OF
+   '%'
+
+
+State 122 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: P $end
+
+    1 P: decls
+
+    2 decls: decl
+    3      | decl decls
+
+    4 decl: varDecl
+    5     | funDecl
+
+    6 varDecl: typeSp varList ';'
+
+    7 varList: ID
+    8        | ID '[' NUM ']'
+    9        | ID ',' varList
+   10        | ID '[' NUM ']' ',' varList
+
+   11 typeSp: INT
+   12       | VOID
+   13       | BOOLEAN
+
+   14 @1: %empty
+
+   15 $@2: %empty
+
+   16 funDecl: typeSp ID '(' @1 params $@2 ')' compoundSt
+
+   17 params: VOID
+   18       | paramList
+
+   19 paramList: param
+   20          | param ',' paramList
+
+   21 param: typeSp ID
+   22      | typeSp ID '[' ']'
+
+   23 $@3: %empty
+
+   24 compoundSt: BEGINNING $@3 localDec stateList END
+
+   25 localDec: %empty
+   26         | varDecl localDec
+
+   27 stateList: %empty
+   28          | statement stateList
+
+   29 statement: expressionSt
+   30          | compoundSt
+   31          | selectionSt
+   32          | iterationSt
+   33          | assignmentSt
+   34          | returnSt
+   35          | readSt
+   36          | writeSt
+
+   37 expressionSt: expression ';'
+   38             | ';'
+
+   39 selectionSt: IF expression THEN statement
+   40            | IF expression THEN statement ELSE statement
+
+   41 iterationSt: WHILE expression DO statement
+
+   42 returnSt: RETURN ';'
+   43         | RETURN expression ';'
+
+   44 readSt: READ var ';'
+
+   45 writeSt: WRITE expression ';'
+
+   46 assignmentSt: var '=' simpleExpr ';'
+
+   47 expression: simpleExpr
+
+   48 var: ID
+   49    | ID '[' expression ']'
+
+   50 simpleExpr: addExpr
+   51           | addExpr relop addExpr
+
+   52 relop: LE
+   53      | '<'
+   54      | '>'
+   55      | GE
+   56      | EE
+   57      | NE
+
+   58 addExpr: term
+   59        | addExpr addop term
+
+   60 addop: '+'
+   61      | '-'
+
+   62 term: factor
+   63     | term multop factor
+
+   64 multop: '*'
+   65       | '/'
+   66       | AND
+   67       | OR
+
+   68 factor: '(' expression ')'
+   69       | NUM
+   70       | var
+   71       | call
+   72       | TRUE
+   73       | FALSE
+   74       | NOT factor
+
+   75 call: ID '(' args ')'
+
+   76 args: %empty
+   77     | argList
+
+   78 argList: expression
+   79        | expression ',' argList
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'%' (37)
+'(' (40) 16 68 75
+')' (41) 16 68 75
+'*' (42) 64
+'+' (43) 60
+',' (44) 9 10 20 79
+'-' (45) 61
+'/' (47) 65
+';' (59) 6 37 38 42 43 44 45 46
+'<' (60) 53
+'=' (61) 46
+'>' (62) 54
+'[' (91) 8 10 22 49
+']' (93) 8 10 22 49
+error (256)
+ID <string> (258) 7 8 9 10 16 21 22 48 49 75
+INT (259) 11
+VOID (260) 12 17
+BOOLEAN (261) 13
+BEGINNING (262) 24
+END (263) 24
+OF (264)
+WHILE (265) 41
+DO (266) 41
+READ (267) 44
+RETURN (268) 42 43
+WRITE (269) 45
+AND (270) 66
+OR (271) 67
+TRUE (272) 72
+FALSE (273) 73
+NOT (274) 74
+ELSE (275) 40
+IF (276) 39 40
+THEN (277) 39 40
+GE (278) 55
+LE (279) 52
+EE (280) 56
+NE (281) 57
+NUM <integer> (282) 8 10 69
+
+
+Nonterminals, with rules where they appear
+
+$accept (42)
+    on left: 0
+P <node> (43)
+    on left: 1, on right: 0
+decls <node> (44)
+    on left: 2 3, on right: 1 3
+decl <node> (45)
+    on left: 4 5, on right: 2 3
+varDecl <node> (46)
+    on left: 6, on right: 4 26
+varList <node> (47)
+    on left: 7 8 9 10, on right: 6 9 10
+typeSp <types> (48)
+    on left: 11 12 13, on right: 6 16 21 22
+funDecl <node> (49)
+    on left: 16, on right: 5
+@1 (50)
+    on left: 14, on right: 16
+$@2 (51)
+    on left: 15, on right: 16
+params <node> (52)
+    on left: 17 18, on right: 16
+paramList <node> (53)
+    on left: 19 20, on right: 18 20
+param <node> (54)
+    on left: 21 22, on right: 19 20
+compoundSt <node> (55)
+    on left: 24, on right: 16 30
+$@3 (56)
+    on left: 23, on right: 24
+localDec <node> (57)
+    on left: 25 26, on right: 24 26
+stateList <node> (58)
+    on left: 27 28, on right: 24 28
+statement <node> (59)
+    on left: 29 30 31 32 33 34 35 36, on right: 28 39 40 41
+expressionSt <node> (60)
+    on left: 37 38, on right: 29
+selectionSt <node> (61)
+    on left: 39 40, on right: 31
+iterationSt <node> (62)
+    on left: 41, on right: 32
+returnSt <node> (63)
+    on left: 42 43, on right: 34
+readSt <node> (64)
+    on left: 44, on right: 35
+writeSt <node> (65)
+    on left: 45, on right: 36
+assignmentSt <node> (66)
+    on left: 46, on right: 33
+expression <node> (67)
+    on left: 47, on right: 37 39 40 41 43 45 49 68 78 79
+var <node> (68)
+    on left: 48 49, on right: 44 46 70
+simpleExpr <node> (69)
+    on left: 50 51, on right: 46 47
+relop <types> (70)
+    on left: 52 53 54 55 56 57, on right: 51
+addExpr <node> (71)
+    on left: 58 59, on right: 50 51 59
+addop <types> (72)
+    on left: 60 61, on right: 59
+term <node> (73)
+    on left: 62 63, on right: 58 59 63
+multop <types> (74)
+    on left: 64 65 66 67, on right: 63
+factor <node> (75)
+    on left: 68 69 70 71 72 73 74, on right: 62 63 74
+call <node> (76)
+    on left: 75, on right: 71
+args <node> (77)
+    on left: 76 77, on right: 75
+argList <node> (78)
+    on left: 78 79, on right: 77 79
+
+
+State 0
+
+    0 $accept: . P $end
+
+    INT      shift, and go to state 1
+    VOID     shift, and go to state 2
+    BOOLEAN  shift, and go to state 3
+
+    P        go to state 4
+    decls    go to state 5
+    decl     go to state 6
+    varDecl  go to state 7
+    typeSp   go to state 8
+    funDecl  go to state 9
+
+
+State 1
+
+   11 typeSp: INT .
+
+    $default  reduce using rule 11 (typeSp)
+
+
+State 2
+
+   12 typeSp: VOID .
+
+    $default  reduce using rule 12 (typeSp)
+
+
+State 3
+
+   13 typeSp: BOOLEAN .
+
+    $default  reduce using rule 13 (typeSp)
+
+
+State 4
+
+    0 $accept: P . $end
+
+    $end  shift, and go to state 10
+
+
+State 5
+
+    1 P: decls .
+
+    $default  reduce using rule 1 (P)
+
+
+State 6
+
+    2 decls: decl .
+    3      | decl . decls
+
+    INT      shift, and go to state 1
+    VOID     shift, and go to state 2
+    BOOLEAN  shift, and go to state 3
+
+    $default  reduce using rule 2 (decls)
+
+    decls    go to state 11
+    decl     go to state 6
+    varDecl  go to state 7
+    typeSp   go to state 8
+    funDecl  go to state 9
+
+
+State 7
+
+    4 decl: varDecl .
+
+    $default  reduce using rule 4 (decl)
+
+
+State 8
+
+    6 varDecl: typeSp . varList ';'
+   16 funDecl: typeSp . ID '(' @1 params $@2 ')' compoundSt
+
+    ID  shift, and go to state 12
+
+    varList  go to state 13
+
+
+State 9
+
+    5 decl: funDecl .
+
+    $default  reduce using rule 5 (decl)
+
+
+State 10
+
+    0 $accept: P $end .
+
+    $default  accept
+
+
+State 11
+
+    3 decls: decl decls .
+
+    $default  reduce using rule 3 (decls)
+
+
+State 12
+
+    7 varList: ID .
+    8        | ID . '[' NUM ']'
+    9        | ID . ',' varList
+   10        | ID . '[' NUM ']' ',' varList
+   16 funDecl: typeSp ID . '(' @1 params $@2 ')' compoundSt
+
+    '['  shift, and go to state 14
+    ','  shift, and go to state 15
+    '('  shift, and go to state 16
+
+    $default  reduce using rule 7 (varList)
+
+
+State 13
+
+    6 varDecl: typeSp varList . ';'
+
+    ';'  shift, and go to state 17
+
+
+State 14
+
+    8 varList: ID '[' . NUM ']'
+   10        | ID '[' . NUM ']' ',' varList
+
+    NUM  shift, and go to state 18
+
+
+State 15
+
+    9 varList: ID ',' . varList
+
+    ID  shift, and go to state 19
+
+    varList  go to state 20
+
+
+State 16
+
+   16 funDecl: typeSp ID '(' . @1 params $@2 ')' compoundSt
+
+    $default  reduce using rule 14 (@1)
+
+    @1  go to state 21
+
+
+State 17
+
+    6 varDecl: typeSp varList ';' .
+
+    $default  reduce using rule 6 (varDecl)
+
+
+State 18
+
+    8 varList: ID '[' NUM . ']'
+   10        | ID '[' NUM . ']' ',' varList
+
+    ']'  shift, and go to state 22
+
+
+State 19
+
+    7 varList: ID .
+    8        | ID . '[' NUM ']'
+    9        | ID . ',' varList
+   10        | ID . '[' NUM ']' ',' varList
+
+    '['  shift, and go to state 14
+    ','  shift, and go to state 15
+
+    $default  reduce using rule 7 (varList)
+
+
+State 20
+
+    9 varList: ID ',' varList .
+
+    $default  reduce using rule 9 (varList)
+
+
+State 21
+
+   16 funDecl: typeSp ID '(' @1 . params $@2 ')' compoundSt
+
+    INT      shift, and go to state 1
+    VOID     shift, and go to state 23
+    BOOLEAN  shift, and go to state 3
+
+    typeSp     go to state 24
+    params     go to state 25
+    paramList  go to state 26
+    param      go to state 27
+
+
+State 22
+
+    8 varList: ID '[' NUM ']' .
+   10        | ID '[' NUM ']' . ',' varList
+
+    ','  shift, and go to state 28
+
+    $default  reduce using rule 8 (varList)
+
+
+State 23
+
+   12 typeSp: VOID .
+   17 params: VOID .
+
+    ')'       reduce using rule 17 (params)
+    $default  reduce using rule 12 (typeSp)
+
+
+State 24
+
+   21 param: typeSp . ID
+   22      | typeSp . ID '[' ']'
+
+    ID  shift, and go to state 29
+
+
+State 25
+
+   16 funDecl: typeSp ID '(' @1 params . $@2 ')' compoundSt
+
+    $default  reduce using rule 15 ($@2)
+
+    $@2  go to state 30
+
+
+State 26
+
+   18 params: paramList .
+
+    $default  reduce using rule 18 (params)
+
+
+State 27
+
+   19 paramList: param .
+   20          | param . ',' paramList
+
+    ','  shift, and go to state 31
+
+    $default  reduce using rule 19 (paramList)
+
+
+State 28
+
+   10 varList: ID '[' NUM ']' ',' . varList
+
+    ID  shift, and go to state 19
+
+    varList  go to state 32
+
+
+State 29
+
+   21 param: typeSp ID .
+   22      | typeSp ID . '[' ']'
+
+    '['  shift, and go to state 33
+
+    $default  reduce using rule 21 (param)
+
+
+State 30
+
+   16 funDecl: typeSp ID '(' @1 params $@2 . ')' compoundSt
+
+    ')'  shift, and go to state 34
+
+
+State 31
+
+   20 paramList: param ',' . paramList
+
+    INT      shift, and go to state 1
+    VOID     shift, and go to state 2
+    BOOLEAN  shift, and go to state 3
+
+    typeSp     go to state 24
+    paramList  go to state 35
+    param      go to state 27
+
+
+State 32
+
+   10 varList: ID '[' NUM ']' ',' varList .
+
+    $default  reduce using rule 10 (varList)
+
+
+State 33
+
+   22 param: typeSp ID '[' . ']'
+
+    ']'  shift, and go to state 36
+
+
+State 34
+
+   16 funDecl: typeSp ID '(' @1 params $@2 ')' . compoundSt
+
+    BEGINNING  shift, and go to state 37
+
+    compoundSt  go to state 38
+
+
+State 35
+
+   20 paramList: param ',' paramList .
+
+    $default  reduce using rule 20 (paramList)
+
+
+State 36
+
+   22 param: typeSp ID '[' ']' .
+
+    $default  reduce using rule 22 (param)
+
+
+State 37
+
+   24 compoundSt: BEGINNING . $@3 localDec stateList END
+
+    $default  reduce using rule 23 ($@3)
+
+    $@3  go to state 39
+
+
+State 38
+
+   16 funDecl: typeSp ID '(' @1 params $@2 ')' compoundSt .
+
+    $default  reduce using rule 16 (funDecl)
+
+
+State 39
+
+   24 compoundSt: BEGINNING $@3 . localDec stateList END
+
+    INT      shift, and go to state 1
+    VOID     shift, and go to state 2
+    BOOLEAN  shift, and go to state 3
+
+    $default  reduce using rule 25 (localDec)
+
+    varDecl   go to state 40
+    typeSp    go to state 41
+    localDec  go to state 42
+
+
+State 40
+
+   26 localDec: varDecl . localDec
+
+    INT      shift, and go to state 1
+    VOID     shift, and go to state 2
+    BOOLEAN  shift, and go to state 3
+
+    $default  reduce using rule 25 (localDec)
+
+    varDecl   go to state 40
+    typeSp    go to state 41
+    localDec  go to state 43
+
+
+State 41
+
+    6 varDecl: typeSp . varList ';'
+
+    ID  shift, and go to state 19
+
+    varList  go to state 13
+
+
+State 42
+
+   24 compoundSt: BEGINNING $@3 localDec . stateList END
+
+    ID         shift, and go to state 44
+    BEGINNING  shift, and go to state 37
+    WHILE      shift, and go to state 45
+    READ       shift, and go to state 46
+    RETURN     shift, and go to state 47
+    WRITE      shift, and go to state 48
+    TRUE       shift, and go to state 49
+    FALSE      shift, and go to state 50
+    NOT        shift, and go to state 51
+    IF         shift, and go to state 52
+    NUM        shift, and go to state 53
+    ';'        shift, and go to state 54
+    '('        shift, and go to state 55
+
+    $default  reduce using rule 27 (stateList)
+
+    compoundSt    go to state 56
+    stateList     go to state 57
+    statement     go to state 58
+    expressionSt  go to state 59
+    selectionSt   go to state 60
+    iterationSt   go to state 61
+    returnSt      go to state 62
+    readSt        go to state 63
+    writeSt       go to state 64
+    assignmentSt  go to state 65
+    expression    go to state 66
+    var           go to state 67
+    simpleExpr    go to state 68
+    addExpr       go to state 69
+    term          go to state 70
+    factor        go to state 71
+    call          go to state 72
+
+
+State 43
+
+   26 localDec: varDecl localDec .
+
+    $default  reduce using rule 26 (localDec)
+
+
+State 44
+
+   48 var: ID .
+   49    | ID . '[' expression ']'
+   75 call: ID . '(' args ')'
+
+    '['  shift, and go to state 73
+    '('  shift, and go to state 74
+
+    $default  reduce using rule 48 (var)
+
+
+State 45
+
+   41 iterationSt: WHILE . expression DO statement
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    expression  go to state 75
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 46
+
+   44 readSt: READ . var ';'
+
+    ID  shift, and go to state 77
+
+    var  go to state 78
+
+
+State 47
+
+   42 returnSt: RETURN . ';'
+   43         | RETURN . expression ';'
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    ';'    shift, and go to state 79
+    '('    shift, and go to state 55
+
+    expression  go to state 80
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 48
+
+   45 writeSt: WRITE . expression ';'
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    expression  go to state 81
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 49
+
+   72 factor: TRUE .
+
+    $default  reduce using rule 72 (factor)
+
+
+State 50
+
+   73 factor: FALSE .
+
+    $default  reduce using rule 73 (factor)
+
+
+State 51
+
+   74 factor: NOT . factor
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    var     go to state 76
+    factor  go to state 82
+    call    go to state 72
+
+
+State 52
+
+   39 selectionSt: IF . expression THEN statement
+   40            | IF . expression THEN statement ELSE statement
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    expression  go to state 83
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 53
+
+   69 factor: NUM .
+
+    $default  reduce using rule 69 (factor)
+
+
+State 54
+
+   38 expressionSt: ';' .
+
+    $default  reduce using rule 38 (expressionSt)
+
+
+State 55
+
+   68 factor: '(' . expression ')'
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    expression  go to state 84
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 56
+
+   30 statement: compoundSt .
+
+    $default  reduce using rule 30 (statement)
+
+
+State 57
+
+   24 compoundSt: BEGINNING $@3 localDec stateList . END
+
+    END  shift, and go to state 85
+
+
+State 58
+
+   28 stateList: statement . stateList
+
+    ID         shift, and go to state 44
+    BEGINNING  shift, and go to state 37
+    WHILE      shift, and go to state 45
+    READ       shift, and go to state 46
+    RETURN     shift, and go to state 47
+    WRITE      shift, and go to state 48
+    TRUE       shift, and go to state 49
+    FALSE      shift, and go to state 50
+    NOT        shift, and go to state 51
+    IF         shift, and go to state 52
+    NUM        shift, and go to state 53
+    ';'        shift, and go to state 54
+    '('        shift, and go to state 55
+
+    $default  reduce using rule 27 (stateList)
+
+    compoundSt    go to state 56
+    stateList     go to state 86
+    statement     go to state 58
+    expressionSt  go to state 59
+    selectionSt   go to state 60
+    iterationSt   go to state 61
+    returnSt      go to state 62
+    readSt        go to state 63
+    writeSt       go to state 64
+    assignmentSt  go to state 65
+    expression    go to state 66
+    var           go to state 67
+    simpleExpr    go to state 68
+    addExpr       go to state 69
+    term          go to state 70
+    factor        go to state 71
+    call          go to state 72
+
+
+State 59
+
+   29 statement: expressionSt .
+
+    $default  reduce using rule 29 (statement)
+
+
+State 60
+
+   31 statement: selectionSt .
+
+    $default  reduce using rule 31 (statement)
+
+
+State 61
+
+   32 statement: iterationSt .
+
+    $default  reduce using rule 32 (statement)
+
+
+State 62
+
+   34 statement: returnSt .
+
+    $default  reduce using rule 34 (statement)
+
+
+State 63
+
+   35 statement: readSt .
+
+    $default  reduce using rule 35 (statement)
+
+
+State 64
+
+   36 statement: writeSt .
+
+    $default  reduce using rule 36 (statement)
+
+
+State 65
+
+   33 statement: assignmentSt .
+
+    $default  reduce using rule 33 (statement)
+
+
+State 66
+
+   37 expressionSt: expression . ';'
+
+    ';'  shift, and go to state 87
+
+
+State 67
+
+   46 assignmentSt: var . '=' simpleExpr ';'
+   70 factor: var .
+
+    '='  shift, and go to state 88
+
+    $default  reduce using rule 70 (factor)
+
+
+State 68
+
+   47 expression: simpleExpr .
+
+    $default  reduce using rule 47 (expression)
+
+
+State 69
+
+   50 simpleExpr: addExpr .
+   51           | addExpr . relop addExpr
+   59 addExpr: addExpr . addop term
+
+    GE   shift, and go to state 89
+    LE   shift, and go to state 90
+    EE   shift, and go to state 91
+    NE   shift, and go to state 92
+    '+'  shift, and go to state 93
+    '-'  shift, and go to state 94
+    '<'  shift, and go to state 95
+    '>'  shift, and go to state 96
+
+    $default  reduce using rule 50 (simpleExpr)
+
+    relop  go to state 97
+    addop  go to state 98
+
+
+State 70
+
+   58 addExpr: term .
+   63 term: term . multop factor
+
+    AND  shift, and go to state 99
+    OR   shift, and go to state 100
+    '*'  shift, and go to state 101
+    '/'  shift, and go to state 102
+
+    $default  reduce using rule 58 (addExpr)
+
+    multop  go to state 103
+
+
+State 71
+
+   62 term: factor .
+
+    $default  reduce using rule 62 (term)
+
+
+State 72
+
+   71 factor: call .
+
+    $default  reduce using rule 71 (factor)
+
+
+State 73
+
+   49 var: ID '[' . expression ']'
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    expression  go to state 104
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 74
+
+   75 call: ID '(' . args ')'
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    $default  reduce using rule 76 (args)
+
+    expression  go to state 105
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+    args        go to state 106
+    argList     go to state 107
+
+
+State 75
+
+   41 iterationSt: WHILE expression . DO statement
+
+    DO  shift, and go to state 108
+
+
+State 76
+
+   70 factor: var .
+
+    $default  reduce using rule 70 (factor)
+
+
+State 77
+
+   48 var: ID .
+   49    | ID . '[' expression ']'
+
+    '['  shift, and go to state 73
+
+    $default  reduce using rule 48 (var)
+
+
+State 78
+
+   44 readSt: READ var . ';'
+
+    ';'  shift, and go to state 109
+
+
+State 79
+
+   42 returnSt: RETURN ';' .
+
+    $default  reduce using rule 42 (returnSt)
+
+
+State 80
+
+   43 returnSt: RETURN expression . ';'
+
+    ';'  shift, and go to state 110
+
+
+State 81
+
+   45 writeSt: WRITE expression . ';'
+
+    ';'  shift, and go to state 111
+
+
+State 82
+
+   74 factor: NOT factor .
+
+    $default  reduce using rule 74 (factor)
+
+
+State 83
+
+   39 selectionSt: IF expression . THEN statement
+   40            | IF expression . THEN statement ELSE statement
+
+    THEN  shift, and go to state 112
+
+
+State 84
+
+   68 factor: '(' expression . ')'
+
+    ')'  shift, and go to state 113
+
+
+State 85
+
+   24 compoundSt: BEGINNING $@3 localDec stateList END .
+
+    $default  reduce using rule 24 (compoundSt)
+
+
+State 86
+
+   28 stateList: statement stateList .
+
+    $default  reduce using rule 28 (stateList)
+
+
+State 87
+
+   37 expressionSt: expression ';' .
+
+    $default  reduce using rule 37 (expressionSt)
+
+
+State 88
+
+   46 assignmentSt: var '=' . simpleExpr ';'
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    var         go to state 76
+    simpleExpr  go to state 114
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+
+
+State 89
+
+   55 relop: GE .
+
+    $default  reduce using rule 55 (relop)
+
+
+State 90
+
+   52 relop: LE .
+
+    $default  reduce using rule 52 (relop)
+
+
+State 91
+
+   56 relop: EE .
+
+    $default  reduce using rule 56 (relop)
+
+
+State 92
+
+   57 relop: NE .
+
+    $default  reduce using rule 57 (relop)
+
+
+State 93
+
+   60 addop: '+' .
+
+    $default  reduce using rule 60 (addop)
+
+
+State 94
+
+   61 addop: '-' .
+
+    $default  reduce using rule 61 (addop)
+
+
+State 95
+
+   53 relop: '<' .
+
+    $default  reduce using rule 53 (relop)
+
+
+State 96
+
+   54 relop: '>' .
+
+    $default  reduce using rule 54 (relop)
+
+
+State 97
+
+   51 simpleExpr: addExpr relop . addExpr
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    var      go to state 76
+    addExpr  go to state 115
+    term     go to state 70
+    factor   go to state 71
+    call     go to state 72
+
+
+State 98
+
+   59 addExpr: addExpr addop . term
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    var     go to state 76
+    term    go to state 116
+    factor  go to state 71
+    call    go to state 72
+
+
+State 99
+
+   66 multop: AND .
+
+    $default  reduce using rule 66 (multop)
+
+
+State 100
+
+   67 multop: OR .
+
+    $default  reduce using rule 67 (multop)
+
+
+State 101
+
+   64 multop: '*' .
+
+    $default  reduce using rule 64 (multop)
+
+
+State 102
+
+   65 multop: '/' .
+
+    $default  reduce using rule 65 (multop)
+
+
+State 103
+
+   63 term: term multop . factor
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    var     go to state 76
+    factor  go to state 117
+    call    go to state 72
+
+
+State 104
+
+   49 var: ID '[' expression . ']'
+
+    ']'  shift, and go to state 118
+
+
+State 105
+
+   78 argList: expression .
+   79        | expression . ',' argList
+
+    ','  shift, and go to state 119
+
+    $default  reduce using rule 78 (argList)
+
+
+State 106
+
+   75 call: ID '(' args . ')'
+
+    ')'  shift, and go to state 120
+
+
+State 107
+
+   77 args: argList .
+
+    $default  reduce using rule 77 (args)
+
+
+State 108
+
+   41 iterationSt: WHILE expression DO . statement
+
+    ID         shift, and go to state 44
+    BEGINNING  shift, and go to state 37
+    WHILE      shift, and go to state 45
+    READ       shift, and go to state 46
+    RETURN     shift, and go to state 47
+    WRITE      shift, and go to state 48
+    TRUE       shift, and go to state 49
+    FALSE      shift, and go to state 50
+    NOT        shift, and go to state 51
+    IF         shift, and go to state 52
+    NUM        shift, and go to state 53
+    ';'        shift, and go to state 54
+    '('        shift, and go to state 55
+
+    compoundSt    go to state 56
+    statement     go to state 121
+    expressionSt  go to state 59
+    selectionSt   go to state 60
+    iterationSt   go to state 61
+    returnSt      go to state 62
+    readSt        go to state 63
+    writeSt       go to state 64
+    assignmentSt  go to state 65
+    expression    go to state 66
+    var           go to state 67
+    simpleExpr    go to state 68
+    addExpr       go to state 69
+    term          go to state 70
+    factor        go to state 71
+    call          go to state 72
+
+
+State 109
+
+   44 readSt: READ var ';' .
+
+    $default  reduce using rule 44 (readSt)
+
+
+State 110
+
+   43 returnSt: RETURN expression ';' .
+
+    $default  reduce using rule 43 (returnSt)
+
+
+State 111
+
+   45 writeSt: WRITE expression ';' .
+
+    $default  reduce using rule 45 (writeSt)
+
+
+State 112
+
+   39 selectionSt: IF expression THEN . statement
+   40            | IF expression THEN . statement ELSE statement
+
+    ID         shift, and go to state 44
+    BEGINNING  shift, and go to state 37
+    WHILE      shift, and go to state 45
+    READ       shift, and go to state 46
+    RETURN     shift, and go to state 47
+    WRITE      shift, and go to state 48
+    TRUE       shift, and go to state 49
+    FALSE      shift, and go to state 50
+    NOT        shift, and go to state 51
+    IF         shift, and go to state 52
+    NUM        shift, and go to state 53
+    ';'        shift, and go to state 54
+    '('        shift, and go to state 55
+
+    compoundSt    go to state 56
+    statement     go to state 122
+    expressionSt  go to state 59
+    selectionSt   go to state 60
+    iterationSt   go to state 61
+    returnSt      go to state 62
+    readSt        go to state 63
+    writeSt       go to state 64
+    assignmentSt  go to state 65
+    expression    go to state 66
+    var           go to state 67
+    simpleExpr    go to state 68
+    addExpr       go to state 69
+    term          go to state 70
+    factor        go to state 71
+    call          go to state 72
+
+
+State 113
+
+   68 factor: '(' expression ')' .
+
+    $default  reduce using rule 68 (factor)
+
+
+State 114
+
+   46 assignmentSt: var '=' simpleExpr . ';'
+
+    ';'  shift, and go to state 123
+
+
+State 115
+
+   51 simpleExpr: addExpr relop addExpr .
+   59 addExpr: addExpr . addop term
+
+    '+'  shift, and go to state 93
+    '-'  shift, and go to state 94
+
+    $default  reduce using rule 51 (simpleExpr)
+
+    addop  go to state 98
+
+
+State 116
+
+   59 addExpr: addExpr addop term .
+   63 term: term . multop factor
+
+    AND  shift, and go to state 99
+    OR   shift, and go to state 100
+    '*'  shift, and go to state 101
+    '/'  shift, and go to state 102
+
+    $default  reduce using rule 59 (addExpr)
+
+    multop  go to state 103
+
+
+State 117
+
+   63 term: term multop factor .
+
+    $default  reduce using rule 63 (term)
+
+
+State 118
+
+   49 var: ID '[' expression ']' .
+
+    $default  reduce using rule 49 (var)
+
+
+State 119
+
+   79 argList: expression ',' . argList
+
+    ID     shift, and go to state 44
+    TRUE   shift, and go to state 49
+    FALSE  shift, and go to state 50
+    NOT    shift, and go to state 51
+    NUM    shift, and go to state 53
+    '('    shift, and go to state 55
+
+    expression  go to state 105
+    var         go to state 76
+    simpleExpr  go to state 68
+    addExpr     go to state 69
+    term        go to state 70
+    factor      go to state 71
+    call        go to state 72
+    argList     go to state 124
+
+
+State 120
+
+   75 call: ID '(' args ')' .
+
+    $default  reduce using rule 75 (call)
+
+
+State 121
+
+   41 iterationSt: WHILE expression DO statement .
+
+    $default  reduce using rule 41 (iterationSt)
+
+
+State 122
+
+   39 selectionSt: IF expression THEN statement .
+   40            | IF expression THEN statement . ELSE statement
+
+    ELSE  shift, and go to state 125
+
+    ELSE      [reduce using rule 39 (selectionSt)]
+    $default  reduce using rule 39 (selectionSt)
+
+
+State 123
+
+   46 assignmentSt: var '=' simpleExpr ';' .
+
+    $default  reduce using rule 46 (assignmentSt)
+
+
+State 124
+
+   79 argList: expression ',' argList .
+
+    $default  reduce using rule 79 (argList)
+
+
+State 125
+
+   40 selectionSt: IF expression THEN statement ELSE . statement
+
+    ID         shift, and go to state 44
+    BEGINNING  shift, and go to state 37
+    WHILE      shift, and go to state 45
+    READ       shift, and go to state 46
+    RETURN     shift, and go to state 47
+    WRITE      shift, and go to state 48
+    TRUE       shift, and go to state 49
+    FALSE      shift, and go to state 50
+    NOT        shift, and go to state 51
+    IF         shift, and go to state 52
+    NUM        shift, and go to state 53
+    ';'        shift, and go to state 54
+    '('        shift, and go to state 55
+
+    compoundSt    go to state 56
+    statement     go to state 126
+    expressionSt  go to state 59
+    selectionSt   go to state 60
+    iterationSt   go to state 61
+    returnSt      go to state 62
+    readSt        go to state 63
+    writeSt       go to state 64
+    assignmentSt  go to state 65
+    expression    go to state 66
+    var           go to state 67
+    simpleExpr    go to state 68
+    addExpr       go to state 69
+    term          go to state 70
+    factor        go to state 71
+    call          go to state 72
+
+
+State 126
+
+   40 selectionSt: IF expression THEN statement ELSE statement .
+
+    $default  reduce using rule 40 (selectionSt)

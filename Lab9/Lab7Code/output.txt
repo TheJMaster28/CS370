@@ -1,0 +1,58 @@
+
+	LABEL		Offset 	 LEVEL
+	_T4		16		2
+	_T3		15		2
+	_T2		14		2
+	_T1		13		2
+	_T0		12		2
+	x		2		2
+	y		1		1
+	b		0		1
+	f		0		0
+	y		100		0
+	Z		0		0
+
+	LABEL		Offset 	 LEVEL
+	_T9		16		2
+	_T8		15		2
+	_T7		14		2
+	_T6		13		2
+	_T5		12		2
+	x		2		2
+	y		1		1
+	b		0		1
+	f		0		0
+	y		100		0
+	Z		0		0
+
+	LABEL		Offset 	 LEVEL
+	y		1		1
+	b		0		1
+	f		0		0
+	y		100		0
+	Z		0		0
+
+	LABEL		Offset 	 LEVEL
+	_T17		9		1
+	_T16		8		1
+	_T15		7		1
+	_T14		6		1
+	_T13		5		1
+	_T12		4		1
+	_T11		3		1
+	_T10		2		1
+	arg2		1		1
+	arg1		0		1
+	main		0		0
+	z		101		0
+	f		0		0
+	y		100		0
+	Z		0		0
+Final table
+
+	LABEL		Offset 	 LEVEL
+	main		0		0
+	z		101		0
+	f		0		0
+	y		100		0
+	Z		0		0

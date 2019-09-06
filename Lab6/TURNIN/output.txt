@@ -1,0 +1,105 @@
+VARIABLE VOID x
+VARIABLE INT x[100]
+FUNCTION INT main
+(
+VOID
+)
+BLOCK STATEMENT
+    VARIABLE INT x
+    BLOCK STATEMENT
+        VARIABLE INT y
+        WHILE
+            LESS THAN OR EQUAL
+                OPERATOR +
+                    IDENTIFIER x
+                    OPERATOR /
+                        NUMBER with value 5
+                        NUMBER with value 2
+                OPERATOR -
+                    OPERATOR +
+                        NUMBER with value 2
+                        IDENTIFIER z
+                    NUMBER with value 5
+        DO
+            IF
+                GREATER THAN OR EQUAL
+                    OPERATOR -
+                        IDENTIFIER h
+                        NUMBER with value 2
+                    OPERATOR -
+                        NUMBER with value 3
+                        NUMBER with value 2
+            THEN
+                READ STATEMENT
+                    IDENTIFIER x
+                        ARRAY REFERENCE [
+                            NUMBER with value 100
+                        ] end of array
+            ELSE
+                WRITE STATMENT
+                    OPERATOR +
+                        IDENTIFIER x
+                            ARRAY REFERENCE [
+                                NUMBER with value 100
+                            ] end of array
+                        NUMBER with value 200
+        CALL IDENTIFIER f ( 
+            OPERATOR +
+                NUMBER with value 3
+                IDENTIFIER x
+                    ARRAY REFERENCE [
+                        IDENTIFIER x
+                            ARRAY REFERENCE [
+                                NUMBER with value 100
+                            ] end of array
+                    ] end of array
+            OPERATOR +
+                IDENTIFIER bar
+                NUMBER with value 200
+            NUMBER with value 20
+        )
+        RETURN
+        RETURN
+            OPERATOR +
+                OPERATOR +
+                    IDENTIFIER x
+                    NUMBER with value 5
+                NUMBER with value 7
+        IF
+            LESS THAN
+                OPERATOR +
+                    IDENTIFIER x
+                    NUMBER with value 10
+                OPERATOR *
+                    NUMBER with value 10
+                    NUMBER with value 20
+        THEN
+            ASSGINMENT
+                IDENTIFIER x
+                TO
+                NOT EQUAL
+                    IDENTIFIER x
+                    NUMBER with value 10
+        WRITE STATMENT
+            NOT
+                OPERATOR OR
+                    OPERATOR AND
+                        NUMBER with value 3
+                        NUMBER with value 5
+                    OPERATOR AND
+                        BOOLEAN TRUE
+                        NOT
+                            BOOLEAN FALSE
+    END
+END
+FUNCTION VOID f
+(
+PARAMETER INT x
+PARAMETER INT y
+PARAMETER VOID z
+)
+BLOCK STATEMENT
+END
+
+
+
